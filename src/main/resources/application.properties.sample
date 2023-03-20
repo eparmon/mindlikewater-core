@@ -1,5 +1,9 @@
 server.port=5491
 
-spring.r2dbc.url=r2dbc:mariadb://localhost:3306/mindlikewater-core
-spring.r2dbc.username=mindlikewater-core
+spring.liquibase.url=jdbc:mariadb://localhost:3306/mindlikewatercore
+spring.liquibase.user=mindlikewatercore
+spring.liquibase.password=
+spring.liquibase.change-log=db/changelog/db.changelog-master.xml
+spring.r2dbc.url=r2dbc:mariadb://localhost:3306/mindlikewatercore
+spring.r2dbc.username=mindlikewatercore
 spring.r2dbc.password=

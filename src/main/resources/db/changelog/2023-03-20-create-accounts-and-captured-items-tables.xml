@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="gene">
+        <createTable tableName="accounts">
+            <column name="id" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="accounts_id_PK"/>
+            </column>
+            <column name="telegram_chat_id" type="BIGINT UNSIGNED"/>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="accounts"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2" author="gene">
+        <createTable tableName="captured_items">
+            <column name="id" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="captured_items_id_PK"/>
+            </column>
+            <column name="account_id" type="INT UNSIGNED">
+                <constraints nullable="false" notNullConstraintName="captured_items_account_id_NN"
+                             references="accounts(id)" foreignKeyName="captured_items_account_id_FK"/>
+            </column>
+            <column name="text" type="TEXT">
+                <constraints nullable="false" notNullConstraintName="captured_items_text_NN"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="captured_items"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
