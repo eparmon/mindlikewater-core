@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet id="1" author="gene">
+        <addColumn tableName="accounts">
+            <column name="created_at" type="DATETIME" defaultValueComputed="NOW()"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="accounts" columnName="created_at"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2" author="gene">
+        <addColumn tableName="captured_items">
+            <column name="created_at" type="DATETIME" defaultValueComputed="NOW()"/>
+            <column name="deleted_at" type="DATETIME"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="captured_items" columnName="deleted_at"/>
+            <dropColumn tableName="captured_items" columnName="created_at"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
